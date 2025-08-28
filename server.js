@@ -8,33 +8,44 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true})) 
 
 let db
-const uri = 'mongodb+srv://admin:admin0058@cluster0.yiplwlc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+const uri = 'mongodb+srv://admin:admin250058@cluster0.yiplwlc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
 
 new MongoClient(uri).connect().then((client)=>{
   console.log('[#] Database is successfully connected!')
   db = client.db('f1wiki')
 
-  app.listen(8080, () => {
-    console.log('[#] Server is running on http://localhost:8080')
+  app.listen(3000, ()=>{
+    console.log('[#] Server is running on http://localhost:3000')
   })
-
 }).catch((err)=>{
   console.log(err)
 })
 
 app.get('/', async(req,res)=>{
-    let result = await db.collection('drivers').find().toArray()
-    res.render('index.ejs', {drivers: result})
+  let result = await db.collection('drivers').find().toArray()
+  res.render('index.ejs', {drivers: result})
 })
 
-app.get('/write', async(req,res)=>{
-    res.render('write.ejs')
+app.get('/post', async(req,res)=>{
+  res.render('post.ejs')
 })
 
 app.post('/add', async(req,res)=>{
-    res.send('작성완료')
-
-    db.collection('drivers').insertOne(req.body), function(err, result){
-        console.log('[#] Data was successfully saved')
-    }
+  try {
+      if(req.body.driver_name == ''){
+    res.send('Invalid Driver Name')
+  } else {
+    await db.collection('drivers').insertOne({
+      driver_name: req.body.driver_name,
+      driver_number: req.body.driver_number,
+      nationality: req.body.nationality,
+      current_team: req.body.current_team
+      
+    })
+    res.redirect('/')
+  }
+  } catch(err) {
+    console.log(err)
+    res.status(500).end('error')
+  }
 })
