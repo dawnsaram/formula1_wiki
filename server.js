@@ -3,7 +3,7 @@ const {MongoClient} = require('mongodb')
 const app = express()
 
 app.set('view engine', 'ejs')
-app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/assets'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true})) 
 
@@ -23,7 +23,12 @@ new MongoClient(uri).connect().then((client)=>{
 
 app.get('/', async(req,res)=>{
   let result = await db.collection('drivers').find().toArray()
-  res.render('index.ejs', {drivers: result})
+  res.render('./pages/index.ejs', {drivers: result})
+})
+
+app.get('/list', async(req,res)=>{
+  let result = await db.collection('drivers').find().toArray()
+  res.render('list.ejs', {drivers: result})
 })
 
 app.get('/post', async(req,res)=>{
@@ -40,7 +45,6 @@ app.post('/add', async(req,res)=>{
       driver_number: req.body.driver_number,
       nationality: req.body.nationality,
       current_team: req.body.current_team
-      
     })
     res.redirect('/')
   }

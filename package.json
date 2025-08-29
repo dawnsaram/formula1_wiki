@@ -1,22 +1,29 @@
 {
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.12",
+    "@tailwindcss/postcss": "^4.1.12",
+    "autoprefixer": "^10.4.21",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "mongodb": "^6.19.0"
+    "mongodb": "^6.19.0",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.12"
   },
   "name": "formula1_wiki",
   "version": "1.0.0",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+  "scripts": {  
+    "start": "node server.js",  
+    "tailwind:css": "postcss assets/css/tailwind.css -o assets/css/style.css",  
+    "serve": "npm run tailwind:css && npm run start",  
+    "tailwind:css-cont": "postcss assets/css/tailwind.css -o assets/css/style.css -w",  
+    "serve-cont": "nodemon server.js"  
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "tailwindcss": "^4.1.12"
+    "nodemon": "^3.1.10"
   }
 }
