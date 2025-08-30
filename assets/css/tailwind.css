@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: "Formula 1";
+    src: url("../fonts/Formula1-Regular-1.ttf");
+}
+
+body {
+    font-family: "Formula 1";
+}

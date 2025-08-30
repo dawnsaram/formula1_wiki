@@ -7,11 +7,8 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --color-red-600: oklch(57.7% 0.245 27.325);
-    --color-sky-600: oklch(58.8% 0.158 241.966);
-    --color-blue-600: oklch(54.6% 0.245 262.881);
+    --color-white: #fff;
     --spacing: 0.25rem;
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: calc(2 / 1.5);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -165,20 +162,64 @@
   }
 }
 @layer utilities {
-  .py-10 {
-    padding-block: calc(var(--spacing) * 10);
+  .float-left {
+    float: left;
   }
-  .text-center {
-    text-align: center;
+  .mr-5 {
+    margin-right: calc(var(--spacing) * 5);
   }
-  .text-2xl {
-    font-size: var(--text-2xl);
-    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  .mr-7 {
+    margin-right: calc(var(--spacing) * 7);
   }
-  .text-blue-600 {
-    color: var(--color-blue-600);
+  .ml-3 {
+    margin-left: calc(var(--spacing) * 3);
   }
-  .text-red-600 {
-    color: var(--color-red-600);
+  .flex {
+    display: flex;
   }
+  .h-9 {
+    height: calc(var(--spacing) * 9);
+  }
+  .h-15 {
+    height: calc(var(--spacing) * 15);
+  }
+  .w-full {
+    width: 100%;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .rounded-full {
+    border-radius: calc(infinity * 1px);
+  }
+  .bg-red-600 {
+    background-color: var(--color-red-600);
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
+  }
+  .text-white {
+    color: var(--color-white);
+  }
+  .hover\:underline {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-line: underline;
+      }
+    }
+  }
+  .hover\:underline-offset-4 {
+    &:hover {
+      @media (hover: hover) {
+        text-underline-offset: 4px;
+      }
+    }
+  }
+}
+@font-face {
+  font-family: "Formula 1";
+  src: url("../fonts/Formula1-Regular-1.ttf");
+}
+body {
+  font-family: "Formula 1";
 }

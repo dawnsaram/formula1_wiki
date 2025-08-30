@@ -26,13 +26,24 @@ app.get('/', async(req,res)=>{
   res.render('./pages/index.ejs', {drivers: result})
 })
 
-app.get('/list', async(req,res)=>{
+app.get('/grandprix', async(req,res)=>{
   let result = await db.collection('drivers').find().toArray()
-  res.render('list.ejs', {drivers: result})
+  res.render('./pages/grandprix.ejs', {drivers: result})
 })
 
-app.get('/post', async(req,res)=>{
-  res.render('post.ejs')
+app.get('/constructors', async(req,res)=>{
+  let result = await db.collection('drivers').find().toArray()
+  res.render('./pages/constructors.ejs', {drivers: result})
+})
+
+app.get('/drivers', async(req,res)=>{
+  let result = await db.collection('drivers').find().toArray()
+  res.render('./pages/drivers.ejs', {drivers: result})
+})
+
+app.get('/circuits', async(req,res)=>{
+  let result = await db.collection('drivers').find().toArray()
+  res.render('./pages/circuits.ejs', {drivers: result})
 })
 
 app.post('/add', async(req,res)=>{
